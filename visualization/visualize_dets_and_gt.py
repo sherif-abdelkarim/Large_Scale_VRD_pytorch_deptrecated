@@ -14,7 +14,7 @@ from tqdm import tqdm
 
 
 dataset = 'gvqa'
-model = '_baseline'
+model = '_hubness'
 split = 'test'
 
 if dataset == 'gvqa':
