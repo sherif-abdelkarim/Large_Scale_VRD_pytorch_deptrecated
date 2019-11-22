@@ -41,7 +41,7 @@ topk_dets_file = current_checkpoints_folder + \
                  'VGG16_reldn_fast_rcnn_conv4_spo_for_p/embd_fusion_w_relu_yall/8gpus_vgg16_softmaxed_triplet_no_last_l2norm_trainval_w_cluster_2_lan_layers{}/{}/reldn_detections.pkl'.format(model, split)
 
 with open(topk_dets_file, 'rb') as f:
-    topk_dets = pickle.load(f)
+    topk_dets = pickle.load(f, encoding='latin1')
 # topk_dets = get_topk_dets(dets)
 
 
@@ -583,7 +583,7 @@ rels = rels_joined_merged_train_idx
 topk_dets_file = current_checkpoints_folder + 'VGG16_reldn_fast_rcnn_conv4_spo_for_p/embd_fusion_w_relu_yall/1gpus_vgg16_softmaxed_triplet_no_last_l2norm_trainval_w_cluster_2_lan_layers/{}/reldn_detections.pkl'.format(split)
 
 with open(topk_dets_file, 'rb') as f:
-    topk_dets_val = pickle.load(f)
+    topk_dets_val = pickle.load(f, encoding='latin1')
 
 # sum_all=0
 # print(len(topk_dets))
