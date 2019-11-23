@@ -200,7 +200,7 @@ def Visualize_Detections(ind, topk_dets, rels_joined_merged_test_idx, sbj_q, prd
     print(str(topk_dets['image_idx'][ind]))
 
     print('ind: ', ind)
-    save_output = False
+    save_output = True
 
     # [u'boxes_obj', u'gt_boxes_obj', u'gt_labels_sbj', u'gt_labels_rel', u'labels_obj', u'labels_rel', u'scores_obj', u'gt_boxes_rel', u'image_id', u'scores_rel', u'scores_sbj', u'boxes_rel', u'labels_sbj', u'image_idx', u'boxes_sbj', u'gt_boxes_sbj', u'gt_labels_obj']
 
@@ -387,7 +387,7 @@ def Visualize_Detections(ind, topk_dets, rels_joined_merged_test_idx, sbj_q, prd
         plt.show()
 
     if save_output:
-        output_dir = os.path.join(dir_path, image_real_id)
+        output_dir = os.path.join(dir_path, str(image_real_id))
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         plt.savefig(os.path.join(output_dir, 'all_true_pos.jpg'), bbox_inches='tight')
@@ -418,7 +418,7 @@ def Visualize_Detections(ind, topk_dets, rels_joined_merged_test_idx, sbj_q, prd
 
 def Visualize_GT_byIndex(ind, all_rels, sbj_q, prd_q, obj_q):
     # print('ind: ', ind)
-    save_output = False
+    save_output = True
 
     # [u'boxes_obj', u'gt_boxes_obj', u'gt_labels_sbj', u'gt_labels_rel', u'labels_obj', u'labels_rel', u'scores_obj', u'gt_boxes_rel', u'image_id', u'scores_rel', u'scores_sbj', u'boxes_rel', u'labels_sbj', u'image_idx', u'boxes_sbj', u'gt_boxes_sbj', u'gt_labels_obj']
 
@@ -529,7 +529,7 @@ def Visualize_GT_byIndex(ind, all_rels, sbj_q, prd_q, obj_q):
                 bbox=dict(facecolor='purple', alpha=0.5, pad=0, edgecolor='none'))
 
     if save_output:
-        output_dir = os.path.join(dir_path, image_real_id)
+        output_dir = os.path.join(dir_path, str(image_real_id))
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         plt.savefig(os.path.join(output_dir, 'all_true_pos.jpg'), bbox_inches='tight')
