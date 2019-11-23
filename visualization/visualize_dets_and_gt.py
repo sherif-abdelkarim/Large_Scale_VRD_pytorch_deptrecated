@@ -383,7 +383,7 @@ def Visualize_Detections(ind, topk_dets, rels_joined_merged_test_idx, sbj_q, prd
             o_name = obj_cats[obj_label]
             print('Top {} : {} {} {}'.format(kk, s_name, p_name, o_name))
             print('\ttotal score:\t {:.6f}'.format(det_score))
-        raw_input('Press enter to continue: ')
+        input('Press enter to continue: ')
         plt.show()
 
     if save_output:
@@ -577,7 +577,7 @@ rels = rels_joined_merged_train_idx
 #     ImageId = rels[ind]
 #     n_ind= Visualize_GT_byIndex(all_rels_map[ImageId], rels_joined_merged, '*', 'riding', '*')
 #     if n_ind>0:
-#         raw_input('Press enter to continue: ')
+#         input('Press enter to continue: ')
 
 
 # topk_dets_file = current_checkpoints_folder + 'VGG16_reldn_fast_rcnn_conv4_spo_for_p/embd_fusion_w_relu_yall/1gpus_vgg16_softmaxed_triplet_no_last_l2norm_trainval_w_cluster_2_lan_layers/{}/reldn_detections.pkl'.format(split)
@@ -592,14 +592,14 @@ rels = rels_joined_merged_train_idx
 #     n_ind= Visualize_Detections(ind,topk_dets_val, rels_joined_merged_val_idx, 'person','*','*', '(?!person)', '*', '*')
 #     sum_all = sum_all+n_ind
 #     if n_ind>0:
-#         raw_input('Press enter to continue: ')
+#         input('Press enter to continue: ')
 #         x=1
 
 # print('sum_all = ', sum_all)
 for ind in range(len(topk_dets)):
     n_ind = Visualize_Detections(ind, topk_dets, rels_joined_merged_test_idx, '*', '*', '*')
     if n_ind > 0:
-        raw_input('Press enter to continue: ')
+        input('Press enter to continue: ')
 
 # relationships_train  = relationships[indices_train]'
 
