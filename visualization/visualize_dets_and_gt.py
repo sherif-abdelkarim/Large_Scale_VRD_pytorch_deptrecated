@@ -14,9 +14,12 @@ from tqdm import tqdm
 
 
 dataset = 'gvqa'
-model = '_hubness'
+model = '_baseline'
 split = 'test'
-
+if model == '_baseline':
+    model_path = ''
+else:
+    model_path = model
 if dataset == 'gvqa':
     dataset_folder = 'GVQA'
 elif dataset == 'vg_wiki_and_relco':
@@ -38,13 +41,13 @@ relationships = json.load(open(rel_path))
 dir_path = current_data_folder + 'vis_output/' + model + '/'
 
 topk_dets_file = current_checkpoints_folder + \
-                 'VGG16_reldn_fast_rcnn_conv4_spo_for_p/embd_fusion_w_relu_yall/8gpus_vgg16_softmaxed_triplet_no_last_l2norm_trainval_w_cluster_2_lan_layers{}/{}/reldn_detections.pkl'.format(model, split)
+                 'VGG16_reldn_fast_rcnn_conv4_spo_for_p/embd_fusion_w_relu_yall/8gpus_vgg16_softmaxed_triplet_no_last_l2norm_trainval_w_cluster_2_lan_layers{}/{}/reldn_detections.pkl'.format(model_path, split)
 
 print('Loading detections pickle..')
 with open(topk_dets_file, 'rb') as f:
     topk_dets = pickle.load(f, encoding='latin1')
 print('Done')
-
+print('topk_dets_orig', len(topk_dets))
 # topk_dets = get_topk_dets(dets)
 
 
@@ -395,25 +398,25 @@ def Visualize_Detections(ind, topk_dets, rels_joined_merged_test_idx, sbj_q, prd
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         plt.savefig(os.path.join(output_dir, 'all_true_pos.jpg'), bbox_inches='tight')
-    plt.show()
+    #plt.show()
     plt.close(fig)
 
     # print SPO names and scores
 
-    print("list of top detection of highest scores ....")
-    for j in range(min(topk, sbj_labels.shape[0])):
-        # det
-        if (sel_gt[j] == False):
-            continue
-        det_score = det_scores[j][0]
-        sbj_label = sbj_labels[j][0]
-        prd_label = prd_labels[j][0]
-        obj_label = obj_labels[j][0]
-        s_name = obj_cats[sbj_label]
-        p_name = prd_cats[prd_label]
-        o_name = obj_cats[obj_label]
-        print('{} {} {}'.format(s_name, p_name, o_name))
-        print('\ttotal score:\t {:.6f}'.format(det_score))
+    #print("list of top detection of highest scores ....")
+    #for j in range(min(topk, sbj_labels.shape[0])):
+    #    # det
+    #    if (sel_gt[j] == False):
+    #        continue
+    #    det_score = det_scores[j][0]
+    #    sbj_label = sbj_labels[j][0]
+    #    prd_label = prd_labels[j][0]
+    #    obj_label = obj_labels[j][0]
+    #    s_name = obj_cats[sbj_label]
+    #    p_name = prd_cats[prd_label]
+    #    o_name = obj_cats[obj_label]
+    #    print('{} {} {}'.format(s_name, p_name, o_name))
+    #    print('\ttotal score:\t {:.6f}'.format(det_score))
 
     return n_q
 
@@ -600,6 +603,7 @@ rels = rels_joined_merged_train_idx
 #         x=1
 
 # print('sum_all = ', sum_all)
+print('topk_dets:', len(topk_dets))
 for ind in range(len(topk_dets)):
     n_ind = Visualize_Detections(ind, topk_dets, rels_joined_merged_test_idx, '*', '*', '*')
     if n_ind > 0:
