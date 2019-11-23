@@ -35,7 +35,7 @@ current_checkpoints_folder = base_checkpoints_folder + dataset + '/'
 rel_path = current_data_folder + 'relationships_clean_spo_joined_and_merged.json'
 relationships = json.load(open(rel_path))
 # VG
-dir_path = current_data_folder + 'vis_output/'
+dir_path = current_data_folder + 'vis_output/' + model + '/'
 
 topk_dets_file = current_checkpoints_folder + \
                  'VGG16_reldn_fast_rcnn_conv4_spo_for_p/embd_fusion_w_relu_yall/8gpus_vgg16_softmaxed_triplet_no_last_l2norm_trainval_w_cluster_2_lan_layers{}/{}/reldn_detections.pkl'.format(model, split)
@@ -373,18 +373,18 @@ def Visualize_Detections(ind, topk_dets, rels_joined_merged_test_idx, sbj_q, prd
                 color='white',
                 bbox=dict(facecolor='purple', alpha=0.5, pad=0, edgecolor='none'))
 
-        for kk in range(5):
-            det_score = det_scores[j][kk]
-            sbj_label = sbj_labels[j][kk]
-            prd_label = prd_labels[j][kk]
-            obj_label = obj_labels[j][kk]
-            s_name = obj_cats[sbj_label]
-            p_name = prd_cats[prd_label]
-            o_name = obj_cats[obj_label]
-            print('Top {} : {} {} {}'.format(kk, s_name, p_name, o_name))
-            print('\ttotal score:\t {:.6f}'.format(det_score))
-        input('Press enter to continue: ')
-        plt.show()
+        # for kk in range(5):
+        #     det_score = det_scores[j][kk]
+        #     sbj_label = sbj_labels[j][kk]
+        #     prd_label = prd_labels[j][kk]
+        #     obj_label = obj_labels[j][kk]
+        #     s_name = obj_cats[sbj_label]
+        #     p_name = prd_cats[prd_label]
+        #     o_name = obj_cats[obj_label]
+        #     print('Top {} : {} {} {}'.format(kk, s_name, p_name, o_name))
+        #     print('\ttotal score:\t {:.6f}'.format(det_score))
+        # input('Press enter to continue: ')
+        # plt.show()
 
     if save_output:
         output_dir = os.path.join(dir_path, str(image_real_id))
