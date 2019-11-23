@@ -40,57 +40,61 @@ dir_path = current_data_folder + 'vis_output/' + model + '/'
 topk_dets_file = current_checkpoints_folder + \
                  'VGG16_reldn_fast_rcnn_conv4_spo_for_p/embd_fusion_w_relu_yall/8gpus_vgg16_softmaxed_triplet_no_last_l2norm_trainval_w_cluster_2_lan_layers{}/{}/reldn_detections.pkl'.format(model, split)
 
+print('Loading detections pickle..')
 with open(topk_dets_file, 'rb') as f:
     topk_dets = pickle.load(f, encoding='latin1')
+print('Done')
+
 # topk_dets = get_topk_dets(dets)
 
 
-print(len(topk_dets))
-print(topk_dets.keys())
-i = 0
-print(topk_dets['boxes_obj'][i].shape)
-print(topk_dets['gt_boxes_obj'][i].shape)
-print(np.sum(topk_dets['boxes_obj'][i] - topk_dets['gt_boxes_obj'][i]))
-# print(topk_dets['gt_boxes_obj'][i])
-print(topk_dets['scores_obj'][i].shape)
-print(topk_dets['labels_obj'][i].shape)
-print(topk_dets['scores_obj'][i].shape)
-print(topk_dets['labels_obj'][i].shape)
-print(topk_dets['scores_rel'][i].shape)
-print(topk_dets['labels_rel'][i].shape)
-min_len = 100
-for det in topk_dets['scores_obj']:
-    # print det.shape[0]
-    if min_len > det.shape[0]:
-        min_len = det.shape[0]
-print('min_len = ', min_len)
-
-max_gt_num = 0
-num_gt_50 = 0
-num_gt_40 = 0
-num_gt_30 = 0
-num_gt_20 = 0
-num_gt_10 = 0
-for gt_labels_prd in topk_dets['scores_rel']:
-    # gt_labels_prd = det['gt_labels_prd']
-    if gt_labels_prd.shape[0] > 50:
-        num_gt_50 += 1
-    if gt_labels_prd.shape[0] > 40:
-        num_gt_40 += 1
-    if gt_labels_prd.shape[0] > 30:
-        num_gt_30 += 1
-    if gt_labels_prd.shape[0] > 20:
-        num_gt_20 += 1
-    if gt_labels_prd.shape[0] > 10:
-        num_gt_10 += 1
-    if max_gt_num < gt_labels_prd.shape[0]:
-        max_gt_num = gt_labels_prd.shape[0]
-print('num_gt_50: ', num_gt_50)
-print('num_gt_40: ', num_gt_40)
-print('num_gt_30: ', num_gt_30)
-print('num_gt_20: ', num_gt_20)
-print('num_gt_10: ', num_gt_10)
-print('max_gt_num: ', max_gt_num)
+# print(len(topk_dets))
+# print(topk_dets.keys())
+# i = 0
+# print(topk_dets['boxes_obj'][i].shape)
+# print(topk_dets['gt_boxes_obj'][i].shape)
+# print(np.sum(topk_dets['boxes_obj'][i] - topk_dets['gt_boxes_obj'][i]))
+# # print(topk_dets['gt_boxes_obj'][i])
+# print(topk_dets['scores_obj'][i].shape)
+# print(topk_dets['labels_obj'][i].shape)
+# print(topk_dets['scores_obj'][i].shape)
+# print(topk_dets['labels_obj'][i].shape)
+# print(topk_dets['scores_rel'][i].shape)
+# print(topk_dets['labels_rel'][i].shape)
+# min_len = 100
+# for det in topk_dets['scores_obj']:
+#     # print det.shape[0]
+#     if min_len > det.shape[0]:
+#         min_len = det.shape[0]
+# print('min_len = ', min_len)
+#
+# max_gt_num = 0
+# num_gt_50 = 0
+# num_gt_40 = 0
+# num_gt_30 = 0
+# num_gt_20 = 0
+# num_gt_10 = 0
+#
+# for gt_labels_prd in topk_dets['scores_rel']:
+#     # gt_labels_prd = det['gt_labels_prd']
+#     if gt_labels_prd.shape[0] > 50:
+#         num_gt_50 += 1
+#     if gt_labels_prd.shape[0] > 40:
+#         num_gt_40 += 1
+#     if gt_labels_prd.shape[0] > 30:
+#         num_gt_30 += 1
+#     if gt_labels_prd.shape[0] > 20:
+#         num_gt_20 += 1
+#     if gt_labels_prd.shape[0] > 10:
+#         num_gt_10 += 1
+#     if max_gt_num < gt_labels_prd.shape[0]:
+#         max_gt_num = gt_labels_prd.shape[0]
+# print('num_gt_50: ', num_gt_50)
+# print('num_gt_40: ', num_gt_40)
+# print('num_gt_30: ', num_gt_30)
+# print('num_gt_20: ', num_gt_20)
+# print('num_gt_10: ', num_gt_10)
+# print('max_gt_num: ', max_gt_num)
 
 # VG
 
